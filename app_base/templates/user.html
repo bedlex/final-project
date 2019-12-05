@@ -1,0 +1,77 @@
+{% extends "index.html"%}}
+{% block content %}
+
+<div class="row ">
+  <div class="container-fluid d-flex align-items-center main__container">
+    <div class="col-12 content1 clearfix">
+          <script>
+            function update() {
+              var profile = document.getElementById("profile");
+              var form = document.getElementById("update")
+              if (profile.style.display == "none") {
+                profile.style.display = "inline-block";
+                form.style.display = "none";
+              } else {
+                form.style.display = "inline-block";
+                profile.style.display = "none";
+              }
+            }
+          </script>
+
+          <h2>{{user.username}} profile </h2>
+          <hr>
+          <div class="containerProfileImage">
+            <img class="profileimages" src="{{user.photourl}}" alt="{{user.username}}">
+            <br>
+            <a class="btn btn-outline-info pictureBtn" href="/load">update picture</a>
+            <br>
+            <hr>
+            <button class="btn btn-outline-info pictureBtn" onclick="update()">udate your profile</button>
+          </div>
+
+          <div id="profile">
+
+              <p>username: {{user.username}}</p>
+              <p>first name: {{user.firstname}} </p>
+              <p>last name: {{user.lastname}} </p>
+              <p>email: {{user.email}}</p>
+              <p>date created: {{user.date_created.strftime('%B %d, %Y')}}</p>
+
+
+          </div>
+
+          <table class="profieItems" id="update">
+
+            <form method="POST" action="">
+              {{ form.hidden_tag() }}
+              <tr>
+                <td colspan="2">
+                  <legend class="border-bottom mb-4 h1_mess">
+                    <p>updating your account</p>
+                  </legend>
+                </td>
+              </tr>
+              <tr>
+                <td>{{ form.username.label(class="form-control-label")}}</td>
+                <td>{{ form.username(class="form-control form-control-lg")}}</td>
+              </tr>
+              <tr>
+                <td>{{ form.firstname.label(class="form-control-label")}}</td>
+                <td>{{ form.firstname(class="form-control form-control-lg")}}</td>
+              </tr>
+              <tr>
+                <td> {{ form.lastname.label(class="form-control-label")}}</td>
+                <td>{{ form.lastname(class="form-control form-control-lg")}}</td>
+              </tr>
+              <tr>
+                <td>{{ form.submit(class="btn btn-outline-info profileBtn") }}</td><td><a class="btn btn-outline-info pictureBtn" href="{{url_for('reqpass_reset')}}">reset password</a></td>
+              </tr>
+            </form>
+          </table>
+
+        </div>
+
+    </div>
+  </div>
+
+{% endblock content %}

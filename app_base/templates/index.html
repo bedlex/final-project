@@ -1,0 +1,73 @@
+<!--Alex Code-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+  <!--Bootstrap link-->
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  <!--main css link-->
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
+  <!--fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+  <title>ChicagoTouristGuide</title>
+</head>
+<body>
+<div class="row">
+  <nav class="navbar navbar-expand-sm nvbr">
+    <ul class="navbar-nav justify-content-beetwen">
+      <li class="nav-item"><a class ="nav-link" href="{{ url_for("home") }}">home</a></li>
+      <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search" value="{{ request.args.get('search','') }}" aria-label="Search">
+      <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+
+
+    </ul>
+    <ul class="navbar-nav ml-auto">
+
+      {% if current_user.is_authenticated: %}
+      <li class="nav-item"><a class ="nav-link" href="{{ url_for("post_article") }}">new post</a></li>
+       <span class="nav-link user"><a href="/user/{{current_user.id}}">User: {{current_user.username}}</a></span>
+      <li class="nav-item"><a class ="nav-link" href="{{ url_for("logout") }}">logout</a></li>
+       {% else: %}
+       <li class="nav-item"><a class ="nav-link" href="{{ url_for("login") }}">login</a></li>
+       <li class="nav-item"><a class ="nav-link" href="{{ url_for("email_confirm") }}">sign up</a></li>
+      {% endif %}
+
+
+        </ul>
+
+  </nav>
+</div>
+<div class="row justify-content-center">
+  <div class="col-xl-2 d-flex justify-content-end left ">
+    <div class="d-flex flex-column justify-content-around ">
+  {% block leftbar %}
+
+  {% endblock leftbar %}
+  </div>
+</div>
+  <div class="col-12 col-xl-8">
+{% block content %}
+
+{% endblock content %}
+</div>
+<div class=" col-xl-2 d-flex justify-content-center right">
+
+  <div class="d-flex flex-column justify-content-around">
+
+{% block rightbar %}
+
+{% endblock rightbar %}
+</div>
+
+</div>
+</div>
+
+</body>
+</html>
+<!--Alex code-->

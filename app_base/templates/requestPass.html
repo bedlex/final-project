@@ -1,0 +1,42 @@
+{% extends "index.html" %}
+{% block content %}
+<section>
+        <div class="container">
+            <div class="row d-flex justify-content-lg-center align-items-center main__container">
+                  <div class="col col-lg-6  ">
+                    <div class="align-middle">
+                    <form method = "POST" action="">
+                        {{ form.hidden_tag() }}
+                        <fieldset class="form-group">
+                              <legend class="border-bottom mb-4 h1_mess">password reset</legend>
+                              <script>
+                                setTimeout(myTimer, 5000);
+                                function myTimer() {
+                                document.getElementById("message").innerHTML = ""
+                                }
+                              </script>
+                        {% with messages = get_flashed_messages() %}
+                        {% if messages: %}
+                        {% for message in messages: %}
+                        <h4 id ="message">{{message}}</h4>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                            <div class="form-group">
+                                {{form.email.label}}
+                                {{form.email(class="form-control form-control-lg")}}
+                            </div>
+
+                        </fieldset>
+                        <div class="form-group">
+                            {{ form.submit(class="btn btn-outline-info") }}
+                        </div>
+                    </form>
+
+                    </div>
+
+                  </div>
+                </div>
+            </div>
+    </section>
+    {% endblock content %}

@@ -1,0 +1,57 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="container">
+  <div class="row d-flex justify-content-center align-items-center content1">
+    <div class="col-12">
+
+  <div class="row d-flex justify-content-center">
+  <div class="col-12"><h2>{{ post.title }}</h2>
+    {% if post.photopath: %}
+
+  <img class="artimg" src="{{url_for('static',filename='artimages/' + post.photopath[0])}}" alt="{{post.title}}">
+
+    {% endif %}
+    <div class="data">
+
+    <div class="avatat_title">author: {{ post.author }}</div>
+
+
+      {% if post.authorPhoto: %}
+
+
+    <img class="avatar" src="{{post.authorPhoto}}" alt="{{post.author}}">
+      {% endif %}
+
+
+   {% if current_user.username == post.author: %}
+    <div class="form-group">
+   <a class="btn btn-outline-info edditBtn" href="/edit/{{ post.id }}">edit article</a>
+   </div>
+   {% endif %}
+
+
+  </div>
+  <p>&nbsp&nbsp{{ post.article|safe }}</p>
+
+</div>
+
+  </div>
+<div class="row justify-content-center">
+  {% if post.photopath: %}
+  {% for photo in post.photopath: %}
+  <img class="artimg" src="{{url_for('static',filename='artimages/' + photo)}}" alt="{{post.title}}">
+  {% endfor %}
+  {% endif %}
+</div>
+  <div class="row d-flex justify-content-between">
+  <div class="support_info ">Address: {{ post.location|safe }} </div>
+  <div class="avatat_title">{{ post.date_created }}</div>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+
+{% endblock content %}
